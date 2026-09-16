@@ -1,0 +1,6 @@
+@Mitt_projekt_backend_HostAddress = http://localhost:5078
+
+GET {{Mitt_projekt_backend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
