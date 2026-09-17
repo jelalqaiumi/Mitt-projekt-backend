@@ -25,5 +25,5 @@ namespace Mitt_projekt_backend.Data
 			new Movie { Id = 9, Title = "Gladiator", Genre = "Action", Year = 2000, Rating = 8.5,
 				Description = "En romersk general blir slav och kämpar som gladiator för hämnd.", ImageUrl = "" },
 			new Movie { Id = 10, Title = "Spirited Away", Genre = "Animerad", Year = 2001, Rating = 8.6,
-	}
+	}           Description = "En flicka hamnar i en magisk värld full av andar.", ImageUrl = "" },
 }
