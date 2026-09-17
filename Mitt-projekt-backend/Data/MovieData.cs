@@ -1,24 +1,20 @@
-using Microsoft.AspNetCore.Mvc;
-using Mitt_projekt_backend.Data;
+using Mitt_projekt_backend.Models;
 
-namespace Mitt_projekt_backend.Controllers
+namespace Mitt_projekt_backend.Data
 {
-	[Route("api/[controller]")]
-	[ApiController]
-	public class MoviesController : ControllerBase
+	public static class MovieData
 	{
-		[HttpGet]
-		public IActionResult GetAll()
+		public static List<Movie> Movies { get; } = new()
 		{
-			return Ok(MovieData.Movies);
-		}
+			new Movie { Id = 1, Title = "The Shawshank Redemption", Genre = "Drama", Year = 1994, Rating = 9.3,
+				Description = "Två fångar bygger en stark vänskap under många år i fängelse.", ImageUrl = "" },
+			new Movie { Id = 2, Title = "The Godfather", Genre = "Kriminal", Year = 1972, Rating = 9.2,
+				Description = "En maffiafamiljs överhuvud lämnar över makten till sin son.", ImageUrl = "" },
+			new Movie { Id = 3, Title = "The Dark Knight", Genre = "Action", Year = 2008, Rating = 9.0,
+				Description = "Batman ställs mot Jokern som sprider kaos i Gotham City.", ImageUrl = "" },
+			new Movie { Id = 4, Title = "Inception", Genre = "Sci-Fi", Year = 2010, Rating = 8.8,
+				Description = "En tjuv stjäl hemligheter genom att gå in i människors drömmar.", ImageUrl = "" },
+			new Movie { Id = 5, Title = "Pulp Fiction", Genre = "Kriminal", Year = 1994, Rating = 8.9,
 
-		[HttpGet("{id}")]
-		public IActionResult GetById(int id)
-		{
-			var movie = MovieData.Movies.FirstOrDefault(m => m.Id == id);
-			if (movie == null) return NotFound();
-			return Ok(movie);
-		}
 	}
 }
