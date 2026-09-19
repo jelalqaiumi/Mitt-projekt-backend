@@ -8,8 +8,10 @@ public static class MovieMappings
 	{
 		Id = movie.Id,
 		Title = movie.Title,
-		Director = movie.Director,
+		Genre = movie.Genre,
 		Year = movie.Year,
+		Rating = movie.Rating,
+		Description = movie.Description,
 		ImageUrl = movie.ImageUrl,
 		CreatedAt = movie.CreatedAt
 	};

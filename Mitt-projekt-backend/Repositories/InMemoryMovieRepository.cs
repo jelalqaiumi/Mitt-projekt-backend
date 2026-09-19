@@ -1,3 +1,4 @@
+﻿using Mitt_projekt_backend.Data;
 using Mitt_projekt_backend.Models;
 
 namespace Mitt_projekt_backend.Repositories;
@@ -6,13 +7,14 @@ public class InMemoryMovieRepository : IMovieRepository
 {
     private readonly List<Movie> _movies = new();
     private readonly object _gate = new();
-    private int _nextId = 1;
+    private int _nextId;
 
     public InMemoryMovieRepository()
     {
-        Seed(new Movie { Title = "The Matrix", Director = "Lana & Lilly Wachowski", Year = 1999 });
-        Seed(new Movie { Title = "Sjunde inseglet", Director = "Ingmar Bergman", Year = 1957 });
-        Seed(new Movie { Title = "Parasite", Director = "Bong Joon-ho", Year = 2019 });
+        foreach (var movie in MovieData.Movies)
+            _movies.Add(Clone(movie));
+
+        _nextId = _movies.Count == 0 ? 1 : _movies.Max(m => m.Id) + 1;
     }
 
     public Task<IReadOnlyList<Movie>> GetAllAsync(CancellationToken ct = default)
@@ -55,18 +57,14 @@ public class InMemoryMovieRepository : IMovieRepository
         }
     }
 
-    private void Seed(Movie movie)
-    {
-        movie.Id = _nextId++;
-        _movies.Add(movie);
-    }
-
     private static Movie Clone(Movie m) => new()
     {
         Id = m.Id,
         Title = m.Title,
-        Director = m.Director,
+        Genre = m.Genre,
         Year = m.Year,
+        Rating = m.Rating,
+        Description = m.Description,
         ImageUrl = m.ImageUrl,
         CreatedAt = m.CreatedAt
     };

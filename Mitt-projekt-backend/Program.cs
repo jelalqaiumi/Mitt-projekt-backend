@@ -1,6 +1,13 @@
+using Mitt_projekt_backend.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddSingleton<IMovieRepository, InMemoryMovieRepository>();
 
 builder.Services.AddCors(options =>
 {
@@ -12,7 +19,13 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-app.UseHttpsRedirection();
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseStaticFiles();
 app.UseCors("Frontend");
 app.MapControllers();
 
